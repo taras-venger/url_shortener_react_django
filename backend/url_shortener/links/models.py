@@ -7,7 +7,7 @@ class Links(models.Model):
     original_url = models.CharField(max_length=300)
     short_url = models.CharField(max_length=30, blank=True)
     lifetime_days = models.IntegerField()
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_on = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.original_url
@@ -20,6 +20,3 @@ def create_short_url(sender, instance, **kwargs):
 
 
 post_save.connect(create_short_url, sender=Links)
-
-# python manage.py makemigrations
-# python manage.py migrate
