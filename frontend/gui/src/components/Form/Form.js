@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Col } from 'react-bootstrap';
 import axios from 'axios';
+import './Form.css';
 
 function CustomForm() {
   const [state, setState] = useState({
@@ -33,29 +34,26 @@ function CustomForm() {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group>
-        <Form.Label>Original URL address</Form.Label>
-        <Form.Control
-          ref={urlRef}
-          className='original'
-          type='text'
-          placeholder='Input URL address here'
-        />
+        <Form.Label>Original URL</Form.Label>
+        <Form.Control ref={urlRef} className='original' type='text' />
       </Form.Group>
-      <Form.Group>
-        <Form.Label>Active, days</Form.Label>
-        <Form.Control
-          ref={timeRef}
-          type='number'
-          min={1}
-          max={365}
-          defaultValue={state.lifetimeDays}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Short URL</Form.Label>
-        <Form.Control type='text' defaultValue={state.shortURL} />
-      </Form.Group>
-      <Button variant='primary' type='submit'>
+      <Form.Row>
+        <Form.Group as={Col}>
+          <Form.Label>Lifetime (days)</Form.Label>
+          <Form.Control
+            ref={timeRef}
+            type='number'
+            min={1}
+            max={365}
+            defaultValue={state.lifetimeDays}
+          />
+        </Form.Group>
+        <Form.Group as={Col}>
+          <Form.Label>Short URL</Form.Label>
+          <Form.Control type='text' defaultValue={state.shortURL} />
+        </Form.Group>
+      </Form.Row>
+      <Button variant='warning' type='submit'>
         Submit
       </Button>
     </Form>
